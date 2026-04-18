@@ -1,6 +1,4 @@
 import os
-os.system("pip uninstall -y numpy")
-os.system("pip install numpy==1.26.4 --no-cache-dir --force-reinstall")
 import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
