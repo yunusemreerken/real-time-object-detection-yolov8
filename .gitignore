@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
 *.pyo
-*.devcontainer/
-*.vscode/
-*.DS_Store
+.devcontainer/
+.vscode/
+.DS_Store
