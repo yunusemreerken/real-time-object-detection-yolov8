@@ -19,8 +19,11 @@ def _resize(img, size, interpolation=1):
         return np.array(pil)
     return img
 
-def _copyMakeBorder(img, top, bottom, left, right, borderType, value=0):
-    return np.pad(img, ((top, bottom), (left, right), (0, 0)), mode='constant', constant_values=value)
+def _copyMakeBorder(img, top, bottom, left, right, borderType, value=None):
+    if img.ndim == 3:
+        return np.pad(img, ((top, bottom), (left, right), (0, 0)), mode='constant')
+    else:
+        return np.pad(img, ((top, bottom), (left, right)), mode='constant')
 
 mock_cv2.resize = _resize
 mock_cv2.copyMakeBorder = _copyMakeBorder
