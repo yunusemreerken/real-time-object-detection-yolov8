@@ -1,30 +1,33 @@
 import sys
 import types
-import numpy as np
 
 mock_cv2 = types.ModuleType("cv2")
 mock_cv2.imshow = lambda *args, **kwargs: None
 mock_cv2.imread = lambda *args, **kwargs: None
 mock_cv2.imwrite = lambda *args, **kwargs: None
-mock_cv2.resize = lambda *args, **kwargs: None
 mock_cv2.cvtColor = lambda *args, **kwargs: None
+mock_cv2.setNumThreads = lambda *args, **kwargs: None
+mock_cv2.getNumThreads = lambda *args, **kwargs: 0
 mock_cv2.IMREAD_COLOR = 1
 mock_cv2.IMREAD_GRAYSCALE = 0
 mock_cv2.COLOR_BGR2RGB = 4
 mock_cv2.COLOR_RGB2BGR = 4
+mock_cv2.INTER_LINEAR = 1
+mock_cv2.INTER_AREA = 3
+mock_cv2.resize = lambda img, size, interpolation=1: img
+mock_cv2.imencode = lambda ext, img: (True, img)
+mock_cv2.imdecode = lambda buf, flags: None
 mock_cv2.VideoCapture = lambda *args, **kwargs: None
-mock_cv2.setNumThreads = lambda *args, **kwargs: None
-mock_cv2.getNumThreads = lambda *args, **kwargs: 0
 sys.modules["cv2"] = mock_cv2
 
 import os
+import tempfile
 import streamlit as st
-from ultralytics import YOLO
-from PIL import Image
 import numpy as np
+from PIL import Image
+from ultralytics import YOLO
 
-st.set_page_config(page_title="YOLOv8 Detection", layout="centered")
-
+st.set_page_config(page_title="YOLOv8 Detection", layout="wide")
 st.title("Real-Time Object Detection (YOLOv8)")
 
 @st.cache_resource
@@ -33,14 +36,47 @@ def load_model():
 
 model = load_model()
 
-uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png", "jpeg"])
+confidence = st.slider("Confidence Threshold", 0.0, 1.0, 0.5, 0.05)
 
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Input Image")
+tab1, tab2, tab3 = st.tabs(["Image", "Video", "Webcam"])
 
-    with st.spinner("Detecting..."):
-        results = model(image)
-        output = results[0].plot()
+with tab1:
+    uploaded_image = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+    if uploaded_image:
+        image = Image.open(uploaded_image)
+        st.image(image, caption="Input Image")
+        with st.spinner("Detecting..."):
+            results = model(image, conf=confidence)
+            output = results[0].plot()
+        st.image(output, caption="Detection Result")
 
-    st.image(output, caption="Detection Result")
+with tab2:
+    uploaded_video = st.file_uploader("Upload Video", type=["mp4", "avi", "mov"])
+    if uploaded_video:
+        import av
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as tmp:
+            tmp.write(uploaded_video.read())
+            tmp_path = tmp.name
+        st.video(tmp_path)
+        with st.spinner("Processing video frames..."):
+            container = av.open(tmp_path)
+            frames_out = []
+            for i, frame in enumerate(container.decode(video=0)):
+                if i >= 50:
+                    break
+                img = frame.to_image()
+                results = model(img, conf=confidence)
+                output = results[0].plot()
+                frames_out.append(output)
+        if frames_out:
+            st.image(frames_out[::5], caption=[f"Frame {i*5}" for i in range(len(frames_out[::5]))])
+
+with tab3:
+    st.info("Webcam: fotoğraf çek, detection anında çalışır.")
+    img_file = st.camera_input("Kamerayı kullan")
+    if img_file:
+        image = Image.open(img_file)
+        with st.spinner("Detecting..."):
+            results = model(image, conf=confidence)
+            output = results[0].plot()
+        st.image(output, caption="Detection Result")
