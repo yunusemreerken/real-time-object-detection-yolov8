@@ -13,6 +13,8 @@ mock_cv2.IMREAD_GRAYSCALE = 0
 mock_cv2.COLOR_BGR2RGB = 4
 mock_cv2.COLOR_RGB2BGR = 4
 mock_cv2.VideoCapture = lambda *args, **kwargs: None
+mock_cv2.setNumThreads = lambda *args, **kwargs: None
+mock_cv2.getNumThreads = lambda *args, **kwargs: 0
 sys.modules["cv2"] = mock_cv2
 
 import os
