@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 from unittest.mock import MagicMock
 
 mock_cv2 = MagicMock()
@@ -9,6 +10,20 @@ mock_cv2.COLOR_RGB2BGR = 4
 mock_cv2.INTER_LINEAR = 1
 mock_cv2.INTER_AREA = 3
 mock_cv2.BORDER_CONSTANT = 0
+
+def _resize(img, size, interpolation=1):
+    from PIL import Image as PILImage
+    if isinstance(img, np.ndarray):
+        pil = PILImage.fromarray(img)
+        pil = pil.resize(size, PILImage.BILINEAR)
+        return np.array(pil)
+    return img
+
+def _copyMakeBorder(img, top, bottom, left, right, borderType, value=0):
+    return np.pad(img, ((top, bottom), (left, right), (0, 0)), mode='constant', constant_values=value)
+
+mock_cv2.resize = _resize
+mock_cv2.copyMakeBorder = _copyMakeBorder
 sys.modules["cv2"] = mock_cv2
 
 import os
