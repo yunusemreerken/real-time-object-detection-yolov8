@@ -1,23 +1,14 @@
 import sys
-import types
+from unittest.mock import MagicMock
 
-mock_cv2 = types.ModuleType("cv2")
-mock_cv2.imshow = lambda *args, **kwargs: None
-mock_cv2.imread = lambda *args, **kwargs: None
-mock_cv2.imwrite = lambda *args, **kwargs: None
-mock_cv2.cvtColor = lambda *args, **kwargs: None
-mock_cv2.setNumThreads = lambda *args, **kwargs: None
-mock_cv2.getNumThreads = lambda *args, **kwargs: 0
+mock_cv2 = MagicMock()
 mock_cv2.IMREAD_COLOR = 1
 mock_cv2.IMREAD_GRAYSCALE = 0
 mock_cv2.COLOR_BGR2RGB = 4
 mock_cv2.COLOR_RGB2BGR = 4
 mock_cv2.INTER_LINEAR = 1
 mock_cv2.INTER_AREA = 3
-mock_cv2.resize = lambda img, size, interpolation=1: img
-mock_cv2.imencode = lambda ext, img: (True, img)
-mock_cv2.imdecode = lambda buf, flags: None
-mock_cv2.VideoCapture = lambda *args, **kwargs: None
+mock_cv2.BORDER_CONSTANT = 0
 sys.modules["cv2"] = mock_cv2
 
 import os
