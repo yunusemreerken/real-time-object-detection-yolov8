@@ -55,6 +55,9 @@ tab1, tab2, tab3 = st.tabs(["Image", "Video", "Webcam"])
 
 with tab1:
     uploaded_image = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+    if uploaded_image is not None and uploaded_image.size > 10 * 1024 * 1024:
+        st.error("File too large. Max 10MB.")
+        st.stop()
     if uploaded_image:
         image = Image.open(uploaded_image)
         st.image(image, caption="Input Image")
@@ -78,7 +81,7 @@ with tab1:
 with tab2:
     uploaded_video = st.file_uploader("Upload Video", type=["mp4", "avi", "mov"])
     # Dosya boyutu kontrolü
-    if uploaded_video.size > 50 * 1024 * 1024:  # 50MB
+    if uploaded_video is not None and uploaded_video.size > 50 * 1024 * 1024:
         st.error("File too large. Max 50MB.")
         st.stop()
     if uploaded_video:
