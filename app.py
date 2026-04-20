@@ -77,6 +77,10 @@ with tab1:
 
 with tab2:
     uploaded_video = st.file_uploader("Upload Video", type=["mp4", "avi", "mov"])
+    # Dosya boyutu kontrolü
+    if uploaded_video.size > 50 * 1024 * 1024:  # 50MB
+        st.error("File too large. Max 50MB.")
+        st.stop()
     if uploaded_video:
         import av
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as tmp:
