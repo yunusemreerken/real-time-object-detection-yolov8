@@ -61,6 +61,18 @@ with tab1:
         with st.spinner("Detecting..."):
             results = model(image, conf=confidence)
             output = results[0].plot()
+            # Detection sonuçlarını göster
+            boxes = results[0].boxes
+            if boxes is not None and len(boxes) > 0:
+                names = results[0].names
+                detections = []
+                for box in boxes:
+                    cls = int(box.cls[0])
+                    conf_val = float(box.conf[0])
+                    detections.append(f"{names[cls]} ({conf_val:.2f})")
+                st.success("Detected: " + ", ".join(detections))
+            else:
+                st.info("No objects detected.")
         st.image(output, caption="Detection Result")
 
 with tab2:
@@ -80,6 +92,18 @@ with tab2:
                 img = frame.to_image()
                 results = model(img, conf=confidence)
                 output = results[0].plot()
+                # Detection sonuçlarını göster
+                boxes = results[0].boxes
+                if boxes is not None and len(boxes) > 0:
+                    names = results[0].names
+                    detections = []
+                    for box in boxes:
+                        cls = int(box.cls[0])
+                        conf_val = float(box.conf[0])
+                        detections.append(f"{names[cls]} ({conf_val:.2f})")
+                    st.success("Detected: " + ", ".join(detections))
+                else:
+                    st.info("No objects detected.")
                 frames_out.append(output)
         if frames_out:
             st.image(frames_out[::5], caption=[f"Frame {i*5}" for i in range(len(frames_out[::5]))])
@@ -92,4 +116,16 @@ with tab3:
         with st.spinner("Detecting..."):
             results = model(image, conf=confidence)
             output = results[0].plot()
+            # Detection sonuçlarını göster
+            boxes = results[0].boxes
+            if boxes is not None and len(boxes) > 0:
+                names = results[0].names
+                detections = []
+                for box in boxes:
+                    cls = int(box.cls[0])
+                    conf_val = float(box.conf[0])
+                    detections.append(f"{names[cls]} ({conf_val:.2f})")
+                st.success("Detected: " + ", ".join(detections))
+            else:
+                st.info("No objects detected.")
         st.image(output, caption="Detection Result")
