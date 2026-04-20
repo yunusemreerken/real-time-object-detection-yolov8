@@ -1,9 +1,19 @@
 import sys
 import types
+import numpy as np
 
 mock_cv2 = types.ModuleType("cv2")
+mock_cv2.imshow = lambda *args, **kwargs: None
+mock_cv2.imread = lambda *args, **kwargs: None
+mock_cv2.imwrite = lambda *args, **kwargs: None
+mock_cv2.resize = lambda *args, **kwargs: None
+mock_cv2.cvtColor = lambda *args, **kwargs: None
+mock_cv2.IMREAD_COLOR = 1
+mock_cv2.IMREAD_GRAYSCALE = 0
+mock_cv2.COLOR_BGR2RGB = 4
+mock_cv2.COLOR_RGB2BGR = 4
+mock_cv2.VideoCapture = lambda *args, **kwargs: None
 sys.modules["cv2"] = mock_cv2
-
 
 import os
 import streamlit as st
