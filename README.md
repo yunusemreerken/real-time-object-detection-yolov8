@@ -30,7 +30,6 @@ A real-time object detection web app built with YOLOv8 and Streamlit. Detects ob
 
 ## Screenshot
 
-> _Add a GIF or screenshot here showing detection in action_
 
 ![Detection Demo](assets/demo.gif)
 
