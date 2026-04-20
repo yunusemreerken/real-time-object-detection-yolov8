@@ -1,7 +1,11 @@
-import os
-os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "0"
-os.environ["LD_PRELOAD"] = ""
+import sys
+import types
 
+mock_cv2 = types.ModuleType("cv2")
+sys.modules["cv2"] = mock_cv2
+
+
+import os
 import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
