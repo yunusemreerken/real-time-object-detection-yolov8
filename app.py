@@ -10,6 +10,10 @@ mock_cv2.COLOR_RGB2BGR = 4
 mock_cv2.INTER_LINEAR = 1
 mock_cv2.INTER_AREA = 3
 mock_cv2.BORDER_CONSTANT = 0
+mock_cv2.getTextSize = lambda text, font, fontScale, thickness: ((len(text) * 10, 20), 5)
+mock_cv2.FONT_HERSHEY_SIMPLEX = 0
+mock_cv2.rectangle = lambda *args, **kwargs: None
+mock_cv2.putText = lambda *args, **kwargs: None
 
 def _resize(img, size, interpolation=1):
     from PIL import Image as PILImage
