@@ -130,7 +130,7 @@ Test the app with provided samples in the `/samples` folder.
 
 | Version | Branch | Deployment | Demo |
 |---------|--------|------------|------|
-| v1.0 | main | Streamlit Cloud | [Demo](https://...streamlit.app) |
+| v1.0 | main | Streamlit Cloud | [Demo](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app) |
 | v2.0 | docker | Oracle Cloud + Docker | [Demo](http://141.148.226.97:8501) |
 
 
