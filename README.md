@@ -1,8 +1,20 @@
-# Real-Time Object Detection — YOLOv8
+# Real-Time Object Detection — YOLOv8 (Docker / v2.0)
 
-A real-time object detection web app built with YOLOv8 and Streamlit. Detects objects from images, videos, and webcam input directly in the browser.
+A containerized real-time object detection app built with YOLOv8 and Streamlit.
+Deployed on Oracle Cloud Free Tier with Docker — optimized for 1GB RAM environments.
 
-🔗 **Live Demo:** [real-time-object-detection-yolov8.streamlit.app](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app/)
+🐳 **Live Demo (Docker / Oracle Cloud):** [http://141.148.226.97:8501](http://141.148.226.97:8501)
+
+🔗 **v1.0 (Streamlit Cloud):** [real-time-object-detection-yolov8.streamlit.app](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app/)
+
+---
+
+## What's New in v2.0
+
+- Containerized with Docker
+- Deployed on Oracle Cloud Free Tier (self-hosted)
+- Optimized for low-memory environments (1GB RAM + 2GB swap)
+- Full infrastructure control
 
 ---
 
@@ -16,6 +28,26 @@ A real-time object detection web app built with YOLOv8 and Streamlit. Detects ob
 
 ---
 
+## Architecture
+
+```
+User
+ │
+ ▼
+Streamlit UI
+ │
+ ▼
+YOLOv8n Model (Ultralytics)
+ │
+ ▼
+Detection Results (Bounding Box + Confidence Score)
+
+Infrastructure:
+Docker Container → Oracle Cloud Free Tier (1GB RAM + 2GB Swap)
+```
+
+---
+
 ## Tech Stack
 
 | Component | Technology |
@@ -24,18 +56,27 @@ A real-time object detection web app built with YOLOv8 and Streamlit. Detects ob
 | Web Interface | Streamlit |
 | Image Processing | PIL, NumPy |
 | Video Processing | PyAV |
-| Deployment | Streamlit Cloud |
+| Containerization | Docker |
+| Cloud | Oracle Cloud Free Tier |
 
 ---
 
 ## Screenshot
-
 
 ![Detection Demo](assets/demo.gif)
 
 ---
 
 ## How to Run
+
+### Docker
+
+```bash
+git clone -b docker https://github.com/yunusemreerken/real-time-object-detection-yolov8
+cd real-time-object-detection-yolov8
+docker build -t yolov8-app .
+docker run -p 8501:8501 yolov8-app
+```
 
 ### Local
 
@@ -49,6 +90,7 @@ streamlit run app.py
 ### Requirements
 
 - Python 3.11
+- Docker
 - See `requirements.txt` for full dependency list
 
 ---
@@ -67,9 +109,16 @@ Detection results include:
 - First run downloads `yolov8n.pt` model automatically (~6MB)
 - Max upload size: 10MB for images, 50MB for videos
 - Webcam tab uses browser camera input (no server-side stream)
+- Optimized for 1GB RAM with 2GB swap on Oracle Cloud Free Tier
 
-## Sample Files
-Test the app with provided samples in the `/samples` folder.
+---
+
+## Versions
+
+| Version | Branch | Deployment | Demo |
+|---------|--------|------------|------|
+| v1.0 | main | Streamlit Cloud | [Demo](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app) |
+| v2.0 | docker | Oracle Cloud + Docker | [Demo](http://141.148.226.97:8501) |
 
 ---
 
