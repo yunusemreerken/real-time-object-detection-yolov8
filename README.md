@@ -126,7 +126,17 @@ Test the app with provided samples in the `/samples` folder.
 
 ---
 
+## Versions
+
+| Version | Branch | Deployment | Demo |
+|---------|--------|------------|------|
+| v1.0 | main | Streamlit Cloud | [Demo](https://...streamlit.app) |
+| v2.0 | docker | Oracle Cloud + Docker | [Demo](http://141.148.226.97:8501) |
+
+
 ## Author
 
 **Yunus Emre Erken**
 [GitHub](https://github.com/yunusemreerken) · [LinkedIn](https://linkedin.com/in/yunus-emre-erken)
+
+
