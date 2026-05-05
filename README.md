@@ -2,7 +2,9 @@
 
 A real-time object detection web app built with YOLOv8 and Streamlit. Detects objects from images, videos, and webcam input directly in the browser.
 
-🔗 **Live Demo:** [real-time-object-detection-yolov8.streamlit.app](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app/)
+🔗 **Live Demo (Streamlit Cloud):** [real-time-object-detection-yolov8.streamlit.app](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app/)
+
+🐳 **Live Demo (Docker / Oracle Cloud):** [http://141.148.226.97:8501](http://141.148.226.97:8501)
 
 ---
 
@@ -16,6 +18,27 @@ A real-time object detection web app built with YOLOv8 and Streamlit. Detects ob
 
 ---
 
+## Architecture
+
+```
+User
+ │
+ ▼
+Streamlit UI
+ │
+ ▼
+YOLOv8n Model (Ultralytics)
+ │
+ ▼
+Detection Results (Bounding Box + Confidence Score)
+
+Deployment Options:
+├── v1.0 → Streamlit Cloud (managed)
+└── v2.0 → Docker → Oracle Cloud (self-hosted, 1GB RAM + 2GB Swap)
+```
+
+---
+
 ## Tech Stack
 
 | Component | Technology |
@@ -24,12 +47,13 @@ A real-time object detection web app built with YOLOv8 and Streamlit. Detects ob
 | Web Interface | Streamlit |
 | Image Processing | PIL, NumPy |
 | Video Processing | PyAV |
-| Deployment | Streamlit Cloud |
+| Containerization | Docker |
+| Cloud Deployment | Oracle Cloud Free Tier |
+| Managed Deployment | Streamlit Cloud |
 
 ---
 
 ## Screenshot
-
 
 ![Detection Demo](assets/demo.gif)
 
@@ -46,9 +70,19 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+### Docker
+
+```bash
+git clone -b docker https://github.com/yunusemreerken/real-time-object-detection-yolov8
+cd real-time-object-detection-yolov8
+docker build -t yolov8-app .
+docker run -p 8501:8501 yolov8-app
+```
+
 ### Requirements
 
 - Python 3.11
+- Docker (for containerized deployment)
 - See `requirements.txt` for full dependency list
 
 ---
@@ -67,9 +101,28 @@ Detection results include:
 - First run downloads `yolov8n.pt` model automatically (~6MB)
 - Max upload size: 10MB for images, 50MB for videos
 - Webcam tab uses browser camera input (no server-side stream)
+- Docker deployment optimized for 1GB RAM with 2GB swap on Oracle Cloud Free Tier
+
+---
 
 ## Sample Files
 Test the app with provided samples in the `/samples` folder.
+
+---
+
+## Changelog
+
+### v2.0 — Docker Branch
+- Containerized with Docker
+- Deployed on Oracle Cloud Free Tier
+- Optimized for low-memory environments (1GB RAM + 2GB swap)
+- Self-hosted, full infrastructure control
+
+### v1.0 — Main Branch
+- Initial release
+- Streamlit Cloud deployment
+- Image, video, and webcam support
+- Confidence threshold slider
 
 ---
 
