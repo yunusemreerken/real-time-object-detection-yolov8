@@ -20,3 +20,5 @@ CMD ["streamlit", "run", "app.py", \
      "--server.address=0.0.0.0", \
      "--server.maxUploadSize=10", \
      "--server.maxMessageSize=50"]
+
+ENV MLFLOW_TRACKING_URI=http://mlflow:5000

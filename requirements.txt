@@ -12,3 +12,4 @@ pandas
 tqdm
 ultralytics==8.3.148
 av
+mlflow==2.13.0
