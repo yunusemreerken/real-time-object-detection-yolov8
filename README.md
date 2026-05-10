@@ -3,7 +3,7 @@
 A containerized real-time object detection app built with YOLOv8 and Streamlit.
 Deployed on Oracle Cloud Free Tier with Docker — optimized for 1GB RAM environments.
 
-🐳 **Live Demo (Docker / Oracle Cloud):** [http://141.148.226.97:8501](http://141.148.226.97:8501)
+🐳 **Live Demo (Docker / Oracle Cloud):** shutdown — security hardening
 
 🔗 **v1.0 (Streamlit Cloud):** [real-time-object-detection-yolov8.streamlit.app](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app/)
 
@@ -118,7 +118,7 @@ Detection results include:
 | Version | Branch | Deployment | Demo |
 |---------|--------|------------|------|
 | v1.0 | main | Streamlit Cloud | [Demo](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app) |
-| v2.0 | docker | Oracle Cloud + Docker | [Demo](http://141.148.226.97:8501) |
+| v2.0 | docker | Oracle Cloud + Docker | shutdown — security hardening |
 
 ---
 
