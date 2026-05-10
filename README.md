@@ -4,7 +4,7 @@ A real-time object detection web app built with YOLOv8 and Streamlit. Detects ob
 
 🔗 **Live Demo (Streamlit Cloud):** [real-time-object-detection-yolov8.streamlit.app](https://real-time-object-detection-yolov8-agkwdbsxfg7enjzxayk2cb.streamlit.app/)
 
-🐳 **Live Demo (Docker / Oracle Cloud):** [http://141.148.226.97:8501](http://141.148.226.97:8501)
+🐳 v2.0 (Docker / Oracle Cloud): shutdown — security hardening
 
 ---
 
