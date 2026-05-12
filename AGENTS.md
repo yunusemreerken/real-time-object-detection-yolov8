@@ -123,6 +123,8 @@ This section grows just-in-time. Add a new task here before asking Codex to impl
   Only `yolov8n.pt` is available locally. For other models, download must be handled automatically via Ultralytics.
 - **Never apply fixes without reporting findings first.** 
   Always list what you found and wait for approval before making changes.
+- After every task, verify with `git log --oneline -3` that changes are actually committed.
+
 
 ---
 
