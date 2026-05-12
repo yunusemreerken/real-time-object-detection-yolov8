@@ -100,6 +100,17 @@ This section grows just-in-time. Add a new task here before asking Codex to impl
 - User should be able to select which classes to display via `st.multiselect`
 - If no filter applied, show all classes (preserve current behavior)
 
+### [ ] Task 4 — Dockerfile Security Analysis
+- Switch to `docker` branch before starting
+- Review Dockerfile and docker-compose.yml if exists
+- Check for: root user, exposed secrets, unnecessary ports, outdated base image
+
+### [ ] Task 5 — Nginx Reverse Proxy
+- Switch to `docker` branch before starting
+- Oracle Cloud instance currently exposes port 8501 directly
+- Create docker-compose.yml if it does not exist
+- Add nginx as reverse proxy in docker-compose.yml
+
 ---
 
 ## Hard Rules (Never Break)
@@ -110,6 +121,8 @@ This section grows just-in-time. Add a new task here before asking Codex to impl
 - Do **not** commit `.env` files or hardcoded secrets.
 - Do **not** reference model files that don't exist in the repo. 
   Only `yolov8n.pt` is available locally. For other models, download must be handled automatically via Ultralytics.
+- **Never apply fixes without reporting findings first.** 
+  Always list what you found and wait for approval before making changes.
 
 ---
 
