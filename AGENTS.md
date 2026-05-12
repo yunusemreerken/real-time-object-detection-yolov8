@@ -55,6 +55,11 @@ streamlit run app.py
 4. **Confidence threshold:** The slider value must always be passed as the `conf` parameter to the model — never hardcode it.
 5. **Error handling:** Camera and video errors must be shown via `st.error()`. Do not silently swallow exceptions.
 
+## Branches
+
+- `main` — Streamlit Cloud deployment, primary branch
+- `docker` — Oracle Cloud deployment, Docker based. Review this branch before any infrastructure changes.
+
 ---
 
 ## Testing Instructions
@@ -103,6 +108,8 @@ This section grows just-in-time. Add a new task here before asking Codex to impl
 - Do **not** change the Python version in `runtime.txt` without also updating `requirements.txt`.
 - Do **not** put code or scripts inside `assets/` — static media only.
 - Do **not** commit `.env` files or hardcoded secrets.
+- Do **not** reference model files that don't exist in the repo. 
+  Only `yolov8n.pt` is available locally. For other models, download must be handled automatically via Ultralytics.
 
 ---
 
