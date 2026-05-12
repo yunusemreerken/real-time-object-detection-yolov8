@@ -43,13 +43,32 @@ from ultralytics import YOLO
 st.set_page_config(page_title="YOLOv8 Detection", layout="wide")
 st.title("Real-Time Object Detection (YOLOv8)")
 
+MODEL_OPTIONS = {
+    "yolov8n": "yolov8n.pt",
+    "yolov8s": "yolov8s.pt",
+    "yolov8m": "yolov8m.pt",
+}
+
 @st.cache_resource
-def load_model():
-    return YOLO("yolov8n.pt")
+def load_model(model_path):
+    return YOLO(model_path)
 
-model = load_model()
+if "model_name" not in st.session_state:
+    st.session_state["model_name"] = "yolov8n"
 
-confidence = st.slider("Confidence Threshold", 0.0, 1.0, 0.5, 0.05)
+selected_model = st.sidebar.selectbox(
+    "Model",
+    options=list(MODEL_OPTIONS),
+    index=list(MODEL_OPTIONS).index(st.session_state["model_name"]),
+)
+
+if selected_model != st.session_state["model_name"]:
+    load_model.clear()
+    st.session_state["model_name"] = selected_model
+
+model = load_model(MODEL_OPTIONS[st.session_state["model_name"]])
+
+confidence = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.5, 0.05)
 
 tab1, tab2, tab3 = st.tabs(["Image", "Video", "Webcam"])
 
